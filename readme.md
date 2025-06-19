@@ -1,1 +1,1 @@
-#
+<p>A simple and interactive week-by-week progress tracking website built using HTML, CSS, and JavaScript. This project was created as part of the ACM-W Summer School to help participants track their learning journey week by week. It was built in collaboration with a fellow ACM-W member</p>
