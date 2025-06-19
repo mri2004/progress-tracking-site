@@ -1,0 +1,169 @@
+/* Base setup */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(-45deg, #0d1b2a, #1b263b, #001219, #0f4c5c);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: #e0f7fa;
+    font-family: 'Poppins', 'Roboto', sans-serif;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Headings */
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 2px 2px 10px #00bcd4;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+    text-shadow: 1px 1px 4px #0097a7;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.tab {
+    padding: 10px 25px;
+    background-color: rgba(0, 188, 212, 0.1);
+    border: 1px solid #00acc1;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #e0f7fa;
+    transition: all 0.3s ease;
+}
+
+.tab:hover,
+.tab.active {
+    background-color: #00acc1;
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(0, 188, 212, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    max-width: 600px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid #00acc1;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3);
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-content p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.github-link {
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 20px;
+    background: #00acc1;
+    color: #fff;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.github-link:hover {
+    background: #0097a7;
+}
+
+/* Form */
+form {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid #00acc1;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3);
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #b2ebf2;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+form input::placeholder,
+form textarea::placeholder {
+    color: #b2dfdb;
+}
+
+form button {
+    padding: 10px 25px;
+    background-color: #00acc1;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0097a7;
+}
+
+#response {
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 500;
+}

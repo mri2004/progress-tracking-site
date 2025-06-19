@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bootcamp Welcome</title>
+  <link rel="stylesheet" href="style1.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <div class="heading">
+    <h1>SheBuilds</h1>
+    <h3>Start Small. Stack Tall.</h3>
+  </div>
+
+  <div class="welcome-text">
+    <h2>Welcome to the Summer Bootcamp!</h2>
+    <p>Select your learning track to get started on your journey.</p>
+  </div>
+
+  <div class="track-container">
+    <div class="track-card" onclick="goToTrack('dsa')">
+      <i class="fa-solid fa-code"></i>
+      <h3>DSA</h3>
+      <p>Master Data Structures and Algorithms to crack coding interviews and strengthen your problem-solving skills.
+      </p>
+    </div>
+
+    <div class="track-card" onclick="goToTrack('aiml')">
+      <i class="fa-solid fa-brain"></i>
+      <h3>AIML</h3>
+      <p>Dive into Artificial Intelligence and Machine Learning to build smart, data-driven applications.</p>
+    </div>
+  </div>
+
+  <script>
+    const dsaRegnos = [
+      "240962528", "240911532", "240962470", "230906068", "230905096", "240911572", "240968005", "240958031",
+      "240953376", "240962016", "240911416", "240911376", "240911176", "240968260", "230911060", "240911590",
+      "240907044", "230905118", "240911644", "240905414", "240911548", "240909468", "240911704", "230924072",
+      "240968290", "240905586"
+    ];
+
+    const aimlRegnos = [
+      "240962528", "240962470", "230906068", "240911572", "240959244", "230911052", "240968005", "240958031",
+      "230911092", "240953376", "240962016", "240911416", "240911376", "240911176", "240968260", "230911060",
+      "230905056", "240911590", "240907044", "230961024", "230905118", "240911644", "240905586", "240905414",
+      "240909468", "230924072", "240902084", "230911136", "240968290"
+    ];
+
+    function goToTrack(track) {
+      const regno = prompt("Enter your Registration Number:");
+      if (!regno) return;
+
+      let allowed = false;
+
+      if (track === 'dsa') {
+        allowed = dsaRegnos.includes(regno.trim());
+      } else if (track === 'aiml') {
+        allowed = aimlRegnos.includes(regno.trim());
+      }
+
+      if (allowed && track=='dsa') {
+        window.location.href = `dsa.html?track=${track}&regno=${regno}`;
+      }
+      else if(allowed && track=='aiml')
+     {
+       window.location.href = `aiml.html?track=${track}&regno=${regno}`;  
+     } else {
+        alert("Sorry! Your registration number is not authorized for this track.");
+      }
+    }
+  </script>
+</body>
+</html>

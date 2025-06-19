@@ -1,0 +1,105 @@
+<!-- === DSA TRACK PAGE === -->
+<!-- File: dsa.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DSA Track</title>
+  <link rel="stylesheet" href="style2.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h2>DSA Weekly Learning Progress</h2>
+  <div class="tabs">
+    <div class="tab active" onclick="showTab(0)" id="week1-tab">Week 1</div>
+    <div class="tab" onclick="showTab(1)">Week 2</div>
+    <div class="tab" onclick="showTab(2)">Week 3</div>
+    <div class="tab" onclick="showTab(3)">Week 4</div>
+  </div>
+
+  <div class="tab-content active">
+    <h3>Week 1: Arrays and Strings</h3>
+    <p>Solved problems on arrays, strings, and practiced on LeetCode.</p>
+    <a id="week1-link" class="github-link" href="#" target="_blank"></a>
+  </div>
+  <div class="tab-content">
+    <h3>Week 2: Linked Lists</h3>
+    <p>Covered singly and doubly linked lists with problem sets.</p>
+  </div>
+  <div class="tab-content">
+    <h3>Week 3: Stacks & Queues</h3>
+    <p>Implemented stacks/queues and solved related problems.</p>
+  </div>
+  <div class="tab-content">
+    <h3>Week 4: Trees & Graphs</h3>
+    <p>Intro to Trees, Graphs and traversal algorithms.</p>
+  </div>
+
+  <h2>Submit Your Work for Week 1</h2>
+  <form id="progressForm">
+    <input type="text" id="name" placeholder="Your Name" required><br>
+    <input type="text" id="repo" placeholder="GitHub Repo Link" required><br>
+    <input type="hidden" id="regno">
+    <input type="hidden" id="week" value="Week 1">
+    <button type="submit">Submit</button>
+  </form>
+
+  <p id="response"></p>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+    function showTab(index) {
+      tabs.forEach((tab, i) => {
+        tab.classList.toggle('active', i === index);
+        tabContents[i].classList.toggle('active', i === index);
+      });
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const regno = urlParams.get("regno");
+    if (regno) {
+      document.getElementById("regno").value = regno;
+      fetch(`https://script.google.com/macros/s/AKfycby2blP9oZ3M_hxV-d0vSyMPqCf4MNizq5QPlwRSPfuVR6Ae6IesZBAyeA3jqkB9WwJydA/exec?regno=${regno}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.weeks && data.weeks.includes("Week 1")) {
+            document.getElementById("week1-tab").classList.add("completed");
+            document.getElementById("response").innerText = "✅ You already submitted Week 1!";
+            document.getElementById("week1-link").href = data.repo || "#";
+            document.getElementById("week1-link").innerText = "🔗 View Submitted Repo";
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          document.getElementById("response").innerText = "⚠️ Couldn't fetch your progress.";
+        });
+    } else {
+      document.getElementById("response").innerText = "❌ Missing registration number in URL.";
+    }
+
+    document.getElementById("progressForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const formData = new URLSearchParams();
+      formData.append("name", document.getElementById("name").value);
+      formData.append("regno", regno);
+      formData.append("repo", document.getElementById("repo").value);
+      formData.append("week", "Week 1");
+
+      fetch("https://script.google.com/macros/s/AKfycby2blP9oZ3M_hxV-d0vSyMPqCf4MNizq5QPlwRSPfuVR6Ae6IesZBAyeA3jqkB9WwJydA/exec", {
+        method: "POST",
+        body: formData
+      })
+      .then(res => res.text())
+      .then(msg => {
+        document.getElementById("response").innerText = "✅ Submitted successfully!";
+        document.getElementById("week1-tab").classList.add("completed");
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById("response").innerText = "❌ Submission failed.";
+      });
+    });
+  </script>
+</body>
+</html>

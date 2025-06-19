@@ -1,0 +1,105 @@
+<!-- === AIML TRACK PAGE === -->
+<!-- File: aiml.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AIML Track</title>
+  <link rel="stylesheet" href="style2.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h2>AIML Weekly Learning Progress</h2>
+  <div class="tabs">
+    <div class="tab active" onclick="showTab(0)" id="week1-tab">Week 1</div>
+    <div class="tab" onclick="showTab(1)">Week 2</div>
+    <div class="tab" onclick="showTab(2)">Week 3</div>
+    <div class="tab" onclick="showTab(3)">Week 4</div>
+  </div>
+
+  <div class="tab-content active">
+    <h3>Week 1: Python for AI</h3>
+    <p>Basics of Python and Jupyter Notebooks. Simple ML with sklearn.</p>
+    <a id="week1-link" class="github-link" href="#" target="_blank"></a>
+  </div>
+  <div class="tab-content">
+    <h3>Week 2: Data Preprocessing</h3>
+    <p>Learned about missing values, encoding, feature scaling.</p>
+  </div>
+  <div class="tab-content">
+    <h3>Week 3: Regression Models</h3>
+    <p>Implemented linear and logistic regression using sklearn.</p>
+  </div>
+  <div class="tab-content">
+    <h3>Week 4: Neural Networks</h3>
+    <p>Covered ANN basics using TensorFlow/Keras.</p>
+  </div>
+
+  <h2>Submit Your Work for Week 1</h2>
+  <form id="progressForm">
+    <input type="text" id="name" placeholder="Your Name" required><br>
+    <input type="text" id="repo" placeholder="GitHub Repo Link" required><br>
+    <input type="hidden" id="regno">
+    <input type="hidden" id="week" value="Week 1">
+    <button type="submit">Submit</button>
+  </form>
+
+  <p id="response"></p>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+    function showTab(index) {
+      tabs.forEach((tab, i) => {
+        tab.classList.toggle('active', i === index);
+        tabContents[i].classList.toggle('active', i === index);
+      });
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const regno = urlParams.get("regno");
+    if (regno) {
+      document.getElementById("regno").value = regno;
+      fetch(`https://script.google.com/macros/s/AKfycby-trb-r9LLsxrBOrl30jViT7onXHB85Ea_FnP5RijkcbFMFm0ZAKupiviXvkuC_uC-tA/exec?regno=${regno}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.weeks && data.weeks.includes("Week 1")) {
+            document.getElementById("week1-tab").classList.add("completed");
+            document.getElementById("response").innerText = "✅ You already submitted Week 1!";
+            document.getElementById("week1-link").href = data.repo || "#";
+            document.getElementById("week1-link").innerText = "🔗 View Submitted Repo";
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          document.getElementById("response").innerText = "⚠️ Couldn't fetch your progress.";
+        });
+    } else {
+      document.getElementById("response").innerText = "❌ Missing registration number in URL.";
+    }
+
+    document.getElementById("progressForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const formData = new URLSearchParams();
+      formData.append("name", document.getElementById("name").value);
+      formData.append("regno", regno);
+      formData.append("repo", document.getElementById("repo").value);
+      formData.append("week", "Week 1");
+
+      fetch("https://script.google.com/macros/s/AKfycby-trb-r9LLsxrBOrl30jViT7onXHB85Ea_FnP5RijkcbFMFm0ZAKupiviXvkuC_uC-tA/exec", {
+        method: "POST",
+        body: formData
+      })
+      .then(res => res.text())
+      .then(msg => {
+        document.getElementById("response").innerText = "✅ Submitted successfully!";
+        document.getElementById("week1-tab").classList.add("completed");
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById("response").innerText = "❌ Submission failed.";
+      });
+    });
+  </script>
+</body>
+</html>

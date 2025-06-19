@@ -1,0 +1,113 @@
+/* Reset and base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(-45deg, #0d1b2a, #1b263b, #001219, #0f4c5c);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    font-family: 'Roboto', sans-serif;
+    color: #e0f7fa;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Header */
+.heading h1 {
+    font-size: 3rem;
+    color: #ffffff;
+    text-shadow: 2px 2px 10px #00bcd4;
+}
+
+.heading h3 {
+    font-size: 1.3rem;
+    margin-top: 10px;
+    color: #b2ebf2;
+}
+
+/* Welcome text */
+.welcome-text {
+    margin: 30px 0 40px;
+}
+
+.welcome-text h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.welcome-text p {
+    font-size: 1.1rem;
+    color: #cfeeff;
+}
+
+/* Track container */
+.track-container {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Track cards */
+.track-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid #00acc1;
+    border-radius: 20px;
+    padding: 30px 25px;
+    width: 280px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 188, 212, 0.3);
+    transition: all 0.3s ease;
+}
+
+.track-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 188, 212, 0.6);
+}
+
+/* Icon and heading inline */
+.track-card h3 {
+    display: inline-block;
+    font-size: 1.5rem;
+    margin-left: 10px;
+    vertical-align: middle;
+    color: #ffffff;
+}
+
+.track-card i {
+    font-size: 1.5rem;
+    color: #00e5ff;
+    vertical-align: middle;
+}
+
+/* Description text */
+.track-card p {
+    margin-top: 15px;
+    font-size: 1rem;
+    color: #b2dfdb;
+    line-height: 1.6;
+    font-weight: 400;
+}
